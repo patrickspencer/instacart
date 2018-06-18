@@ -42,7 +42,4 @@ if __name__ == '__main__':
     df = pd.concat((orders_train, orders_prior), axis=0)
     df = orders.merge(df, on='order_id', how='left')
 
-    # 'Unnamed: 0' column is the same as the index so it's redundant
-    # df.drop(['Unnamed: 0'], axis=1, inplace=True)
-
     df.to_csv(data_dir + 'orders_full.csv', index=False)
