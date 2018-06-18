@@ -39,6 +39,6 @@ if __name__ == '__main__':
 
     # save data
     data_dir = '../data'
-    train_set.to_csv(data_dir + '/train_set_small.csv')
-    validation_set.to_csv(data_dir + '/validation_set_small.csv')
-    test_set.to_csv(data_dir + '/test_set_small.csv')
+    train_set.to_csv(data_dir + '/train_set_small.csv', index=False)
+    validation_set.to_csv(data_dir + '/validation_set_small.csv', index=False)
+    test_set.to_csv(data_dir + '/test_set_small.csv', index=False)
