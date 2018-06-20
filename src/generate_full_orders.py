@@ -30,14 +30,30 @@ the left join.
 This take a while and produces a file called orders_full.csv which is about 1.9
 gb.
 """
+import numpy as np
 import pandas as pd
 
 if __name__ == '__main__':
 
     data_dir = '~/instacart_data/'
-    orders = pd.read_csv(data_dir + 'orders.csv')
-    orders_prior = pd.read_csv(data_dir + 'order_products__prior.csv')
-    orders_train = pd.read_csv(data_dir + 'order_products__train.csv')
+    orders = pd.read_csv(data_dir + 'orders.csv', dtype={
+        'order_id': np.int32,
+        'user_id': np.int32,
+        'eval_set': 'category',
+        'order_number': np.int16,
+        'order_dow': np.int8,
+        'order_hour_of_day': np.int8,
+        'days_since_prior_order': np.float32})
+    orders_prior = pd.read_csv(data_dir + 'order_products__prior.csv', dtype={
+            'order_id': np.int32,
+            'product_id': np.uint16,
+            'add_to_cart_order': np.int16,
+            'reordered': np.int8})
+    orders_train = pd.read_csv(data_dir + 'order_products__train.csv', dtype={
+            'order_id': np.int32,
+            'product_id': np.uint16,
+            'add_to_cart_order': np.int16,
+            'reordered': np.int8})
 
     df = pd.concat((orders_train, orders_prior), axis=0)
     df = orders.merge(df, on='order_id', how='left')
